@@ -8,6 +8,7 @@ const searchForm = document.querySelector('#search-form');
 const celciusBtn = document.querySelector('.celcius')
 const fahrenheitBtn = document.querySelector('.fahrenheit')
 
+// 4 step
 let unit = 'imperial'; // Fahrenheit
 
 celciusBtn.addEventListener('click', () => {
@@ -22,11 +23,13 @@ fahrenheitBtn.addEventListener('click', () => {
   celciusBtn.classList.remove('active');
 })
 
+// 1 step
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault(); // prevent default behavior of form
   fetchWeatherData();
 });
 
+// 2 step
 const fetchWeatherData = async() => {
   //const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=warsaw&appid=d030ac84773f6c1da5dcb6a7fe964373`);
   const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=${unit}&appid=d030ac84773f6c1da5dcb6a7fe964373`);
@@ -34,6 +37,7 @@ const fetchWeatherData = async() => {
   displayData(data);  
 };
 
+// 3, 5 step
 const displayData = (data) => {
   let tempVal = unit === 'imperial' ? 'F' : 'C';
   let windSpeed = unit === 'imperial' ? 'miles/hr' : 'km/hr';
