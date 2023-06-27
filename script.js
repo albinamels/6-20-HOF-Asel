@@ -6,7 +6,8 @@ const wind = document.querySelector('.wind .bold');
 const cityInput = document.querySelector('#city-input');
 const searchForm = document.querySelector('#search-form');
 const celciusBtn = document.querySelector('.celcius')
-const fahrenheitBtn = document.querySelector('.fahrenheit')
+const fahrenheitBtn = document.querySelector('.fahrenheit');
+const body = document.querySelector('body');
 
 // 4 step
 let unit = 'imperial'; // Fahrenheit
@@ -27,6 +28,7 @@ fahrenheitBtn.addEventListener('click', () => {
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault(); // prevent default behavior of form
   fetchWeatherData();
+  fetchPhotos();
 });
 
 // 2 step
@@ -36,6 +38,19 @@ const fetchWeatherData = async() => {
   const data = await res.json();
   displayData(data);  
 };
+
+// 6 step
+const fetchPhotos = async () => {
+  const res = await fetch(`https://api.unsplash.com/search/photos?query=${cityInput.value}&client_id=K1z7daCOfTevvq6JyTpQCEB3wXsdfC4N1d4H4WPWtxM`);
+  const data = await res.json();
+  const imageUrl = data.results[3].urls.full;
+  renderBackground(imageUrl);
+}
+
+// 7 step
+ const renderBackground = (url) => {
+  body.style.backgroundImage = `url(${url})`;
+ }
 
 // 3, 5 step
 const displayData = (data) => {
